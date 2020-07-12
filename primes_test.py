@@ -6,33 +6,22 @@
 import time
 import numpy as np
 import matplotlib.pyplot as plt
-from algorithms.primes1 import primes as p1
-from algorithms.primes2 import primes as p2
-from algorithms.primes3 import primes as p3
-from algorithms.primes4 import primes as p4
-from algorithms.primes5 import primes as p5
-from algorithms.primes6 import primes as p6
-from algorithms.primes7 import primes as p7
-from algorithms.primes8 import primes as p8
+from algorithms import primes1, primes2, primes3, primes4, primes5, primes6, primes7, primes8
 
-num_algorithms = 8
-start = 100
-stop = 10000
-step = 100
+
 ubounds = range(0, 10000, 100)
 num = len(ubounds)
 
 results = []
 
-for i in range(1, num_algorithms+1):
-    print('Testing algorithm', i)
+for algorithm in (primes1, primes2, primes3, primes4, primes5, primes6, primes7, primes8):
+    print(f'Testing algorithm {algorithm.__name__}')
     results_for_current_algorithm = []
     for ubound in ubounds:
         starttime = time.time()
-        result = eval('p' + str(i) + '(ubound)')
+        result = algorithm(ubound)
         endtime = time.time()
         duration = endtime - starttime
-        #print(len(result), "primes found in", duration, "seconds.")
         results_for_current_algorithm.append(duration)
     results.append(results_for_current_algorithm)
 
